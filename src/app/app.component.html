@@ -1,3 +1,5 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <h1>{{title}}</h1>
+</md-toolbar>
+<p>Click here to select a time: <md-timepicker [(time)]="mytime"></md-timepicker></p>
+<p>Selected Time: {{mytime}}</p>

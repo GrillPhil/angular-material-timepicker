@@ -1,0 +1,167 @@
+@import '~@angular/material/core/theming/all-theme';
+@mixin calendar-theme($theme) {
+  $primary: map-get($theme, primary);
+
+    .header {
+        padding: 16px;
+        background-color:md-color($primary);
+    }
+    .footer [md-button] {
+        color: md-color($primary);
+    }
+    .day-background-normal {
+        background-color: transparent;
+    }
+    .day-background-selected {
+        background-color: md-color($primary);
+    }
+    .day-foreground-normal {
+        color: rgba(0, 0, 0, .87);
+    }
+    .day-foreground-selected {
+        color: rgba(255, 255, 255, .87);
+    }
+    .day-foreground-today {
+        color: md-color($primary);
+    }
+    .circle-container.i60 {
+        .circle-item {
+            &:hover {
+                background: md-color($primary);
+            }
+        }
+    } 
+}
+.header, .nav, .content, .footer {
+    font-family: Roboto, "Segoe UI", "Helvetica Neue",sans-serif;
+}
+.header {
+    padding: 16px;
+    color: rgba(255, 255, 255, .6);
+    font-size: 42px;
+    font-weight: 400;
+    text-align: center;
+}
+.header span {
+    cursor: pointer;
+}
+.header span.active{
+    color: rgba(255, 255, 255, 1);
+}
+
+.footer {
+    text-align: right;
+    padding: 8px;
+    padding-bottom: 16px;
+}
+.footer [md-button] {
+    min-width: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.content {
+    min-width: 18.2em;
+    padding-bottom: 20px;
+}
+
+/// Mixin to place items on a circle
+/// @author Hugo Giraudel
+/// @author Ana Tudor
+/// @param {Integer} $item-count - Number of items on the circle
+/// @param {Length} $circle-size - Large circle size
+/// @param {Length} $item-size - Single item size
+@mixin on-circle($item-count, $circle-size, $item-size) {  
+  width:  $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  padding: 0; 
+  list-style: none;
+  
+  > * {
+    display: block;
+    position: absolute;
+    top:  50%; 
+    left: 50%;
+    margin: -($item-size / 2);
+    width:  $item-size;
+    height: $item-size;
+  
+    $angle: (360 / $item-count);
+    $rot: -90;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: rotate($rot * 1deg) translate($circle-size / 2) rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}
+
+.circle-background{
+    position: absolute;
+    background: rgba(0,0,0,.1);
+    border-radius: 50%;
+    width: 230px;
+    height: 230px;
+    left: -20px;
+    top: -20px;
+}
+.circle-host {
+    position: relative;
+    margin: 2.5em auto;
+    width: 190px;
+    height: 190px;
+}
+.circle-container {
+  position: absolute;
+    .circle-item {
+        display: block; 
+        max-width: 100%; 
+        border-radius: 50%;
+        background: transparent;
+        width: 40px;
+        height: 40px;
+        transition: .15s;
+        line-height: 40px;
+        text-align: center;
+    }
+}
+.circle-container.i60 {
+  @include on-circle($item-count: 60, $circle-size: 190px, $item-size: 40px); 
+  .circle-item { 
+    &:hover {
+        background: rgba(0, 0, 0, .8);
+    }
+  }
+}
+.circle-container.i12 {
+  @include on-circle($item-count: 12, $circle-size: 190px, $item-size: 40px); 
+  .circle-item {
+  }
+}
+.circle-container-inner {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+    .circle-item {
+        display: block; 
+        max-width: 100%; 
+        border-radius: 50%;
+        background: transparent;
+        width: 40px;
+        height: 40px;
+        transition: .15s;
+        line-height: 40px;
+        text-align: center;
+        font-size: .8em;
+        opacity: .6;
+    }
+}
+.circle-container-inner.i12 {
+  @include on-circle($item-count: 12, $circle-size: 120px, $item-size: 40px); 
+  .circle-item {
+  }
+}

@@ -1,0 +1,32 @@
+<div class="header">
+    <span [ngClass]="isPartActive(0)" (click)="switchActivePart(0)">{{ currentHours }}</span>:<span  [ngClass]="isPartActive(1)"  (click)="switchActivePart(1)">{{ currentMinutes }}</span>
+</div>
+<div class="content">
+    <div class="circle-host">
+        <div class="circle-background"></div>
+        <!-- Hours -->
+        <!-- AM Hours -->
+        <div *ngIf="activeTimePart === 0" class="circle-container i12">
+            <div class="circle-item" *ngFor="let entry of amHours">{{ entry }}</div>
+        </div>
+        <!-- PM Hours -->
+        <div *ngIf="activeTimePart === 0" class="circle-container-inner i12">
+            <div class="circle-item" *ngFor="let entry of pmHours">{{ entry }}</div>
+        </div>
+
+        <!-- Minutes -->
+        <!-- All Minutes -->
+        <div *ngIf="activeTimePart === 1" class="circle-container i60">
+            <div class="circle-item" *ngFor="let entry of allMinutes"></div>
+        </div>
+        <!-- Stepped Minutes -->
+        <div *ngIf="activeTimePart === 1" class="circle-container i12">
+            <div class="circle-item" *ngFor="let entry of steppedMinutes">{{ entry }}</div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <a md-button (click)="onNow()">Now</a>
+    <a md-button (click)="onCancel()">Cancel</a>
+    <a md-button (click)="onOk()">Ok</a>
+</div>
