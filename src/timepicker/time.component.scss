@@ -1,37 +1,4 @@
 @import '~@angular/material/core/theming/all-theme';
-@mixin calendar-theme($theme) {
-  $primary: map-get($theme, primary);
-
-    .header {
-        padding: 16px;
-        background-color:md-color($primary);
-    }
-    .footer [md-button] {
-        color: md-color($primary);
-    }
-    .day-background-normal {
-        background-color: transparent;
-    }
-    .day-background-selected {
-        background-color: md-color($primary);
-    }
-    .day-foreground-normal {
-        color: rgba(0, 0, 0, .87);
-    }
-    .day-foreground-selected {
-        color: rgba(255, 255, 255, .87);
-    }
-    .day-foreground-today {
-        color: md-color($primary);
-    }
-    .circle-container.i60 {
-        .circle-item {
-            &:hover {
-                background: md-color($primary);
-            }
-        }
-    } 
-}
 .header, .nav, .content, .footer {
     font-family: Roboto, "Segoe UI", "Helvetica Neue",sans-serif;
 }
@@ -114,6 +81,7 @@
     margin: 2.5em auto;
     width: 190px;
     height: 190px;
+    cursor: pointer;
 }
 .circle-container {
   position: absolute;
@@ -121,7 +89,6 @@
         display: block; 
         max-width: 100%; 
         border-radius: 50%;
-        background: transparent;
         width: 40px;
         height: 40px;
         transition: .15s;
@@ -150,18 +117,46 @@
         display: block; 
         max-width: 100%; 
         border-radius: 50%;
-        background: transparent;
         width: 40px;
         height: 40px;
         transition: .15s;
         line-height: 40px;
         text-align: center;
         font-size: .8em;
-        opacity: .6;
     }
 }
 .circle-container-inner.i12 {
   @include on-circle($item-count: 12, $circle-size: 120px, $item-size: 40px); 
   .circle-item {
   }
+}
+
+.circle-container-inner .circle-item.unselected {
+    opacity: .6;
+}
+
+@mixin calendar-theme($theme) {
+  $primary: map-get($theme, primary);
+
+    .header {
+        padding: 16px;
+        background-color:md-color($primary);
+    }
+    .footer [md-button] {
+        color: md-color($primary);
+    }
+    .circle-container .circle-item.selected, .circle-container-inner .circle-item.selected {
+        background: md-color($primary);
+        color: white;
+        opacity: 1;
+    }
+}
+
+.marker {
+    pointer-events: none;
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    left: -20px;
+    top: -20px;
 }
