@@ -85,16 +85,6 @@
 }
 .circle-container {
   position: absolute;
-    .circle-item {
-        display: block; 
-        max-width: 100%; 
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        transition: .15s;
-        line-height: 40px;
-        text-align: center;
-    }
 }
 .circle-container.i60 {
   @include on-circle($item-count: 60, $circle-size: 190px, $item-size: 40px); 
@@ -113,22 +103,21 @@
   position: absolute;
   top: 35px;
   left: 35px;
-    .circle-item {
-        display: block; 
-        max-width: 100%; 
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        transition: .15s;
-        line-height: 40px;
-        text-align: center;
-        font-size: .8em;
-    }
 }
 .circle-container-inner.i12 {
   @include on-circle($item-count: 12, $circle-size: 120px, $item-size: 40px); 
   .circle-item {
   }
+}
+
+.circle-item {
+    display: block; 
+    max-width: 100%; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
 }
 
 .circle-container-inner .circle-item.unselected {
